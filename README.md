@@ -8,4 +8,4 @@ Tecnologías:
 - SQLAlchemy
 
 # Entity-Relationship Model
-![image](https://github.com/JuanMe16/Diary-REST-API/assets/112258389/2c78dd42-a3b6-4ef8-af1b-ea6ef438c9fa)
+![image](https://github.com/JuanMe16/Diary_REST_API/assets/112258389/0abd0600-17cc-4fc2-a7a2-466372ef4ada)
