@@ -1,16 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
+from flask_bcrypt import Bcrypt
 
 db: SQLAlchemy
-ma: Marshmallow
+bcrypt: Bcrypt
 
 def create_database(app: Flask):
-    global db, ma
+    global db, bcrypt
     db = SQLAlchemy(app)
-    ma = Marshmallow(app)
+    bcrypt = Bcrypt(app)
     
-    return db, ma
+    return db, bcrypt
 
 def create_tables(app: Flask, db: SQLAlchemy):
     from src.models import Diary, User

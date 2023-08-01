@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = config("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = config("SQLALCHEMY_TRACK_MODIFICATIONS")
 
-db, ma = create_database(app)
+db, bcrypt = create_database(app)
 create_tables(app, db)
 
 def init_app(config):

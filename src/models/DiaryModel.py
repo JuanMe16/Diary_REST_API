@@ -1,4 +1,4 @@
-from sqlalchemy.dialects.mysql import LONGTEXT
+from sqlalchemy.dialects.mysql import TEXT
 from datetime import datetime
 from sqlalchemy import select
 from .UserModel import User
@@ -12,7 +12,13 @@ class Diary(db.Model):
     user_id = sa.Column(sa.ForeignKey(User.id), nullable=False)
     title = sa.Column(sa.String(25), nullable=False)
     date = sa.Column(sa.Date, default=datetime.now, nullable=False)
-    notes = sa.Column(LONGTEXT, nullable=False)
+    notes = sa.Column(TEXT, nullable=False)
+
+    @classmethod
+    def get_diaries_entries(cls, user_id):
+        all_diaries = Diary.query.filter_by(user_id=user_id).all()
+
+        return all_diaries
 
     @classmethod
     def read_diary_entry(cls, id):
@@ -31,11 +37,10 @@ class Diary(db.Model):
         return diary.id
     
     @classmethod
-    def update_diary_entry(cls, id, title, notes):
+    def update_diary_entry(cls, id, notes):
         diary_entry = db.session.execute(select(Diary).filter_by(id=id)).scalar_one()
         old_notes = diary_entry.notes
         diary_entry.notes = notes
-        diary_entry.title = notes
         db.session.commit()
         return old_notes
 
