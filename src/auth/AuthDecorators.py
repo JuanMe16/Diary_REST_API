@@ -1,4 +1,5 @@
 from flask import request, jsonify
+from datetime import datetime
 from functools import wraps
 from . import AuthService
 
@@ -11,11 +12,11 @@ def token_required(f):
             token = request.headers["token"]
             jwted_payload = AuthService.check_jwt(jwt_code=token)
             jwted_user_id = jwted_payload["id_user"]
+            jwt_exp_time = jwted_payload["expiration_time"]
             verified_user_id = User.verify_password(jwted_payload["user_email"], jwted_payload["user_password"])
-            if not (jwted_user_id == verified_user_id):
+            if not (jwted_user_id == verified_user_id) or float(jwt_exp_time) <= datetime.now().timestamp():
                 return jsonify({"message": "Invalid Auth Token"})
-        except Exception as ex:
-            print(ex)
+        except Exception:
             return jsonify({"message": "Invalid Auth Token"})
         
         return f(jwted_user_id, *args, **kwargs)

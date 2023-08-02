@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request, make_response
+from datetime import datetime, timedelta
 from src.auth import AuthService
 
 auth = Blueprint('auth', __name__)
@@ -9,12 +10,13 @@ def log_in_user():
 
     try:
         request_body = request.json
+        expiration_time = datetime.now() + timedelta(hours=8)
         user_email, user_password = request_body["email"], request_body["password"]
         id_verified_user = User.verify_password(user_email, user_password)
         if not id_verified_user:
             return make_response(jsonify({"message": "Invalid Credentials."}, 401))
         
-        generated_jwt = AuthService.generate_jwt({"id_user": id_verified_user, "user_email": user_email ,"user_password": user_password})
+        generated_jwt = AuthService.generate_jwt({"id_user": id_verified_user, "user_email": user_email ,"user_password": user_password, "expiration_time": str(expiration_time.timestamp())})
         return make_response(jsonify({"token": generated_jwt}), 200)
     except Exception:
         return make_response(jsonify({"error": "Check request body"}), 400)
