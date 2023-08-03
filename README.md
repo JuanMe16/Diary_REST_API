@@ -15,4 +15,5 @@ Tecnologías:
 - MySQL
 
 # Entity-Relationship Model
-![image](https://github.com/JuanMe16/Diary_REST_API/assets/112258389/e3be61a9-9e10-4921-9eff-4fc6533f214d)
+![image](https://github.com/JuanMe16/Diary_REST_API/assets/112258389/cd6849a2-fe0c-4c45-82ab-22153b9fd529)
+
