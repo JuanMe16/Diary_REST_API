@@ -13,6 +13,10 @@ class User(db.Model):
 
     @classmethod
     def create_user(cls, user_name, user_email, user_password):
+        check_user = db.session.execute(select(User).filter_by(email=user_email)).scalar()
+        if check_user:
+            raise ValueError('Email is already registered')
+        
         new_user = cls(name=user_name, email=user_email,
                        password=bcrypt.generate_password_hash(user_password))
         db.session.add(new_user)
