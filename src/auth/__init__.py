@@ -11,5 +11,4 @@ class AuthService():
     @classmethod
     def check_jwt(cls, jwt_code):
         coded_data = jwt.decode(jwt_code, Config.SECRET_KEY, algorithms="HS256")
-        print(coded_data)
         return coded_data
