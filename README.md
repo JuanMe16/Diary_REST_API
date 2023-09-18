@@ -3,7 +3,7 @@ Diary REST API made with python and flask framework ;)
 
 # Description
 I made this REST API to register all of the notes you have on the day, all diaries have an unique id and also get the date you wrote them.
-This API works witb auth, so make sure to register yourself and log-in before accessing the /diaries route.
+This API works with auth, so make sure to register yourself and log-in before accessing the /diaries route.
 
 Don't forget to write your own .env file following the .env.example file!
 
